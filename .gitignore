@@ -1,0 +1,8 @@
+# Django
+*.db
+.env
+
+# VSCode
+.vscode/
+
+

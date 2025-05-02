@@ -1,13 +1,25 @@
 <!-- templates/blog/post/list.html -->
-{% extends "blog/base.html" %} {% block title %}Αναρτήσεις{% endblock %} {%
-block content %}
+
+{% extends "blog/base.html" %} 
+{% block title %}Αναρτήσεις{% endblock %} 
+{% block content %}
+
 <div class="bg-white py-24 sm:py-32">
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <div class="mx-auto max-w-2xl">
-      <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-        From the blog
-      </h2>
-      <p class="mt-2 text-lg leading-8 text-gray-600">Lorem ipsum</p>
+      <div class="flex "> 
+        <div>
+          <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          From the blog
+        </h2>
+        <p class="mt-2 text-lg leading-8 text-gray-600">Lorem ipsum</p>
+      </div>
+        
+      <div class="ml-auto h-auto">
+        <a href="{% url 'login' %}" class="inline-flex items-center px-4 py-2 text-black text-sm font-medium rounded border border-black/20 hover:border-black/60">Login</a>
+      </div>
+    </div>
+    
 
       <!-- Αναρτήσεις Django -->
       <div
@@ -34,7 +46,7 @@ block content %}
             <h3
               class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600"
             >
-              <a href="{% url 'blog:post_detail' post.id %}">
+            <a href="{{ post.get_absolute_url }}">
                 <span class="absolute inset-0"></span>
                 {{ post.title }}
               </a>
@@ -83,7 +95,7 @@ block content %}
         </div>
         {% endif %}
       </nav>
-    </div>
+    
   </div>
 </div>
 {% endblock %}
