@@ -7,9 +7,11 @@ from django.views.decorators.http import require_POST
 from .forms import CommentForm
 
 
+
+
 def post_list(request):
     object_list = Post.objects.filter(status='P')
-    paginator = Paginator(object_list, 3)  # 5 posts ανά σελίδα
+    paginator = Paginator(object_list, 3) 
     page_number = request.GET.get('page')
     try:
         posts = paginator.page(page_number)
@@ -28,7 +30,7 @@ def post_detail(request, year, month, day, post):
 
     comments = post.comments.filter(active=True)
 
-    # Κενή φόρμα για νέο σχόλιο
+
     form = CommentForm()
 
     return render(request, 'blog/post/detail.html', {
@@ -67,3 +69,4 @@ def post_comment(request, post_id):
         comment.post = post
         comment.save()
     return redirect(post.get_absolute_url())
+

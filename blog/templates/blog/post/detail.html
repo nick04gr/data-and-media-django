@@ -15,22 +15,29 @@
       </div>
     </article>
 
-    <!-- Tags -->
-    <p class="gap flex flex-wrap items-center space-x-2"><span>Tags:</span> 
-      {% for tag in post.tags.all %}
-      <a
-        href="#"
-        class="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
-      >
-        {{ tag.name }}
-      </a>
-      {% endfor %}
-      </p>
-      
+    <div class="flex items-center justify-between">
+      <!-- Tags -->
+      <p class="gap flex flex-wrap items-center space-x-2"><span>Tags:</span> 
+        {% for tag in post.tags.all %}
+        <a
+         href="#"
+          class="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
+        >
+           {{ tag.name }}
+        </a>
+        {% endfor %}
+        </p>
+
+        <a class="inline-flex items-center px-4 py-2 text-black text-sm font-medium rounded border border-black/20 hover:border-black/60" href="{% url 'blog:post_share' post.id %}
+">Share via Email</a>
+
+    </div>
+
+    
       <div
       class="mt-10 space-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16"
     >
-  </div>
+    </div>
 
     <!-- Σχόλια -->
     <section class="mb-16">

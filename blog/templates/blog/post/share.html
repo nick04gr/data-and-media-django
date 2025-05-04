@@ -1,0 +1,24 @@
+{% extends "blog/base.html" %}
+{% block content %}
+
+<!-- blog/post/share.html -->
+<div class="mx-auto max-w-7xl px-6 lg:px-8 text-center">
+    <div class="mx-auto max-w-2xl">
+
+    <h1>Κοινοποίηση "{{ post.title }}" με email</h1>
+
+    {% if sent %}
+        <p>Το email στάλθηκε με επιτυχία!</p>
+        <button></button>
+    {% else %}
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button  class="inline-flex items-center px-4 py-2 text-black text-sm font-medium rounded border border-black/20 hover:border-black/60" type="submit">Αποστολή</button>
+        </form>
+    {% endif %}
+
+    </div>
+</div>
+
+{% endblock %}
