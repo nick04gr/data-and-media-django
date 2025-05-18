@@ -1,10 +1,11 @@
 # account/views.py
 from django.shortcuts import render,  redirect
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
-from .forms import ProfileForm
+from .forms import UserProfileForm
+from django.contrib.auth.decorators import login_required
 
 def register(request):
     if request.method == 'POST':
@@ -16,15 +17,21 @@ def register(request):
     else:
         form = UserCreationForm()
 
-    return render(request, 'account/registration/register.html', {'form': form})
+    return render(request, 'registration/register.html', {'form': form})
 
+
+@login_required
+def profile_view(request):
+    return render(request, 'registration/profile.html')  
+
+@login_required
 def edit_profile(request):
-    profile = request.user.profile
     if request.method == 'POST':
-        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        form = UserProfileForm(request.POST, instance=request.user.profile, user=request.user)
         if form.is_valid():
             form.save()
-            return redirect('account:profile') 
+            return redirect('account:profile')
     else:
-        form = ProfileForm(instance=profile)
-    return render(request, 'account/edit_profile.html', {'form': form})
+        form = UserProfileForm(instance=request.user.profile, user=request.user)
+    return render(request, 'registration/edit_profile.html', {'form': form})
+
